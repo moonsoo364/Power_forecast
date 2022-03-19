@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연구 개요</title>
+    <!-- fontawsome: 아이콘 -->
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.0.0/js/all.js"></script>
+    <script src="https://kit.fontawesome.com/2d323a629b.js"></script>
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <!-- css 스타일 -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/lab_exp.css">
+    <script src="js/hamberg.js" defer></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+   
+</head>
+<body>
+    <nav class="navbar"id="nav">
+        
+
+        <ul class="navbar_menu">
+            <li class="navbar_logo" style="font-size: 36px;">
+                <i class="fas fa-bolt"></i>
+                <a href="/">Team Eletricity</a>
+            </li>
+        
+            <li class="lab_pros"><a href="lab_explain" id="nav_list">연구개요</a></li>
+            <li class="process" id="slide_nav" >                   
+                <a style="cursor: pointer;" id="nav_list">연구과정</a>
+                     <div class="slide_menu">
+                         <div><a id="slide_list" href="data_preprocessing">1.데이터 처리</a></div>
+                         <div><a id="slide_list" href="deep_learning_model">2.딥러닝 모델</a></div>
+                         <div><a id="slide_list" href="graph_predict">3.그래프 예측</a></div>                              
+                     </div>              
+            </li>
+            <li  class="lab_refer"><a id="nav_list" href="reference">참고자료</a></li>
+        
+            
+        </ul>
+        <a href="#" class="navbar_togleBtn">
+            <i class="fas fa-bars"></i>
+        </a>   
+       
+        <script src="js/navigation_slide.js"></script> 
+        
+        
+    </nav>
+    <section class="lab_explain" >
+        <h1 class="explain_title" id="explain_header" >연구개요</h1>
+        
+        <ul class="explain_main">
+           
+            <!--1. 전력 수요  -->
+            <li class="title"id="need_title">1. 전력 수요 예측의 필요성</li>
+            <li class="subtitle"id="need_subtitle">
+                전력은 산업에서 가장 필요한 에너지원 입니다.<br> 
+                전력 수요와 공급이 알맞게 배정되어야 낭비되는 전기를 줄일 수 있습니다.
+            </li>
+            <li id="img_set_need">
+                <img src="img/explain/Factory.png" alt="factory"class="img_set" >
+                <img src="img/explain/Energy.png" alt="energy" class="img_set">
+            </li>
+            <li class="explain_content"id="need_content">
+            전기 공급을 원활히 하기 위해서는 전기 수요에 맞는 규모의 전력 설비 시설을 확보하는 것이 필요합니다.<br>
+            전력 수요에 비해 공급이 초과될 결우에는 에너지 낭비가 발생하고 수요에 비해 발전시설이 부족한 경우 전력 공급난을 일으킬 수 있습니다.
+            그래서 정확한 전력 수요 예측은 에너지 사용 계획, 전력 수립, 에너지 정책 결정의 판단 자료로써 중요한 역할을 합니다.
+            </li>
+            <li id="img_set_Ondemand">
+                <img src="img/explain/Demand.png" alt="Demand"class="img_set" >
+                <img src="img/explain/Supply Chain.png" alt="Supply Chain" class="img_set">
+            </li>    
+           <!--2. 전력 변수 -->
+           <li class="title"id="var_title">2. 전력 수요에 영향을 끼치는 변수들</li>
+           <li class="subtitle"id="var_subtitle">
+            전력 수요는 장소와 시간에 따라 계속해서 변합니다.<br>
+            어떤 요소들이 전력 사용량에 영향을 끼치는 지 알아봅시다.
+            </li>
+            <!-- 2-1 기온 -->
+            <li class="in_title"id="temp_title">2.1 기온</li>
+            <li class="explain_content" id="temp_content">
+                기온은 전력 사용량에 크게 영향을 끼칩니다.<br>
+                무더운 여름 날에는 가정과 공장에서 에어컨을 가동하고 겨울에는 난방기를 가동합니다.<br>
+                기온 변화가 큰 겨울과 여름철에는 전력 사용량이 상승합니다.
+                
+            </li>
+            <li id="img_temp">
+                <img src="img/explain/Hot.png" alt="Hot"class="img_set" >
+                <img src="img/explain/Analytics.png" alt="Analytics" class="img_set">
+            </li>
+            <!-- 2-2 휴일 -->
+            <li class="in_title"id="vacation_title">2.2 휴일</li>
+            <li class="explain_content"id="vacation_content">
+                공휴일이나 주말, 연말 연휴에는 공장에서의 전력 수요가 줄어듭니다.<br> 
+                휴일에는 공장에 출근하는 근로자가 줄면서 생산 활동이 줄어들게 들며 이는 전력 수요의 감소로 이어지게 됩니다.<br> 
+                하지만 숙박 및 음식점 등에서는  휴일에 전력 수요 감소로 이어지지 않았습니다.<br>  
+                이는 주말에 영업하는 가게들도 있고 이용하는 손님 수가 크게 변하지 않기 때문입니다.
+            </li>
+            <li id="img_vacation" >
+                <img src="img/explain/Holiday.png" alt="Holiday"class="img_set" >
+            </li>
+            <!-- 2.3 한국에서의 전력 변수 -->
+            <li class="in_title"id="korea_title">2.3 한국에서의 전력 변수</li>
+            <li class="explain_content"id="korea_content">
+                대한민국은 수출 주도형 경제면서 생산 공장 시설이 많은 국가 입니다.<br>
+                한국의 수출 실적이 증가함에 따라 공장 시설 확충도 많아지고  그에따라 전력 소비도 급증했습니다.<br>
+                한국은 저렴한 전력 요금을 유지하기 위해 원자력 발전과 석탄 발전 비율이 높습니다.<br>
+                하지만 탄소 중립 정책으로 인해 친환경 에너지 비율을 늘려가고 있으며<br>
+                이는 전력 생산 단가가 기존 발전보다 비싸기 때문에 산업용 전력 요금이 빠르게 증가하고 있습니다.<br>
+            </li>
+            <li id="img_vacation">
+                <img src="img/explain/Profit.png" alt="Profit"class="img_set" >
+            </li>
+            <!-- 3.개발 사업 -->
+            <li class="title"id="develop_title">3. 전력 수요 예측으로 개발될 사업</li>
+            <li class="subtitle"id="develop_subtitle">
+                필요한 만큼 공급하고 필요한 만큼 사용하는 것이 가장 좋습니다.<br>
+                전력 수요와 공급을 원활히 하기위한 사업들은 뭐가 있을까요?
+            </li>
+            <!-- 3.1 스마트 그리드 -->
+            <li class="in_title"id="grid_title">3.1 스마트 그리드</li>
+            <li class="explain_content"id="grid_content">
+                매 해 한국의 전력 수급량은 많아지고 있습니다. 2021년 여름의 전력 수요는 94.4GW로 역대 최고치를 기록 했으며 
+                예비전력치는 4GW수준으로 최저치를 기록했습니다.매년 전력 공급을 위해 설비를 계속 늘리기에는 분명 한계가 있습니다. 
+                스마트 그리드는 전력 수요처와 공급처 사이에 실시간으로 전력 사용량을 공유하고 소통하는 기술입니다.  
+            </li>
+            <li id="grid_set">
+                <img src="img/explain/Plant.png" alt="Plant"class="img_set" >
+                <img src="img/explain/Grid.png" alt="Grid" class="img_set">
+                
+            </li>
+            <!-- 3.2 전력 거래 중개 서비스 -->
+            <li class="in_title" id="trade_title">3.2 전력 거래 중개 서비스</li>
+            <li class="explain_content" id="trade_content">
+                계절별로 사업 특성에 따라 전력 사용량은 달라집니다.<br>
+                예를 들어 여름철 아이스크림 공장에서는 아이스크림 판매량을 늘리기 위해 공장 가동률을 최대로 운영합니다.<br>
+                그러나 호빵 공장에서는 여름철 호빵 수요가 적기 때문에 공장 가동률을 줄일 것 입니다.<br>
+                호빵 공장에서 전력 사용권을 아이스크림 공장한테 팔 수 있으면 아이스크림 공장은<br>
+                 안정적인 전력 공급을 할 수 있어 좋고 호빵 공장에서는 비수기 매출을 매꿀 수 있어 좋을 것 입니다.<br>
+                전력 거래 중개 서비스는 전력 수요를 파악하고 거래를 원하는 업체끼리 연결해주는 서비스입니다.<br>
+            </li>
+            <li id="img_trade">
+                
+                <img src="img/explain/Battery.png "alt="Battery" class="img_set">
+                <img src="img/explain/Directios.png" alt="Directios" class="img_set">
+               
+            </li>
+
+        </ul>
+
+      
+        
+      
+        
+    </section>
+    
+    <footer>
+        <div class="footer">
+            
+            <div type="button" class="btn-gotocontent" aria-label="페이지 상단으로 이동" style="display: inline-block;" href="#nav">
+                <ul class="nav_link">
+                    <li class="nav_item" id="nav_item">항목</li>
+                    <li class="need_nav"id="nav_list"><a href="#nav" class="need_nav">1.전력 수요</a></li>
+                    <li class="var_nav"id="nav_list"><a href="#var_title" class="var_nav">2.영향 변수</a></li>
+                    <li class="develop_nav"id="nav_list"> <a href="#develop_title" class="develop_nav">3.개발 사업</a></li>
+                </ul>
+                
+            </div>
+        </div>
+
+    </footer>
+</body>
+</html>

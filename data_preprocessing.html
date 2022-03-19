@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 처리</title>
+    <!-- fontawsome: 아이콘 -->
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://kit.fontawesome.com/2d323a629b.js"></script>
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <!-- css 스타일 -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/data_pre.css">
+    <script src="js/hamberg.js" defer></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+</head>
+<body>
+    <nav class="navbar"id="nav">
+        
+
+        <ul class="navbar_menu">
+            <li class="navbar_logo" style="font-size: 36px;">
+                <i class="fas fa-bolt"></i>
+                <a href="/">Team Eletricity</a>
+            </li>
+        
+            <li class="lab_pros"><a href="lab_explain" id="nav_list">연구개요</a></li>
+            <li class="process" id="slide_nav" >                   
+                <a style="cursor: pointer;" id="nav_list">연구과정</a>
+                     <div class="slide_menu">
+                         <div><a id="slide_list" href="data_preprocessing">1.데이터 처리</a></div>
+                         <div><a id="slide_list" href="deep_learning_model">2.딥러닝 모델</a></div>
+                         <div><a id="slide_list" href="graph_predict">3.그래프 예측</a></div>                              
+                     </div>              
+            </li>
+            <li  class="lab_refer"><a id="nav_list" href="reference">참고자료</a></li>
+        
+            
+        </ul>
+        <a href="#" class="navbar_togleBtn">
+            <i class="fas fa-bars"></i>
+        </a>   
+       
+        <script src="js/navigation_slide.js"></script> 
+        
+        
+    </nav>
+        <section class="data_pre">
+            <h1 class="pre_title">데이터 처리</h1>
+            <div class="pre_main">
+                 <ul id="paragraph" class="data_collect">
+                    <li  class="title">1.데이터 수집</li>
+                    <li class="subtitle">
+                        데이터의 형식이 맞아야 데이터 가공을 할수있습니다.<br>
+                        데이터를 처리하기 전 데 수집한 데이터의 형식을 알아봅시다.
+                    </li>
+                    <li class="paragraph_content">
+
+                    조사한 지역은 영국 런던이고 사용하는 값은 기온 데이터와 전력 데이터 입니다.<br>
+                    기온 데이터는 1시간 간격으로 화씨단위로(실험에선 섭씨단위로 변환) 값을 가지고 있고<br>
+                    전력 데이터는 Watt단위로 값을 가지고 있습니다.<br>
+                    전력 데이터의 형식이 일반적인 날짜형식인 datetime형이 아니기 때문에 서로의 데이터를 같이 쓰려면
+                     전력 데이터의 날짜 형식을 수정해줘야 합니다.
+
+                    </li>
+                    <li class="paragraph_image">
+                        <img class="image" src="img/pre/london_.weather.png" alt="img">
+                        <div class="img_title">
+                            &#9650; wunderground페이지에서 런던의 날씨 정보를 가지고온 모습
+                        </div>
+                        
+                        <img class="image" src="img/pre/weather_table.png" alt="img">
+                        <div class="img_title">                            
+                            &#9650;해당 사이트에서는 30분 단위로 기온 값을 가지고 있다.
+                        </div>
+                        <img class="image" src="img/pre/london usage.png" alt="img"> 
+                        <div class="img_title" >
+                            
+                            &#9650;런던 가정의 전력 사용량(Watt)과 날짜(Unix Timestamp)가 저장된 파일
+                            
+                        </div>
+                        
+                    </li>
+                   
+                 </ul>
+                 <ul id="paragraph" class="data_process">
+                    <li  class="title" id="nav_point1">2.데이터 전처리</li>
+                    <li class="subtitle">
+                        데이터를 불러오다 보면 비어 있는 값도 있고 엉뚱한 값이<br>
+                        들어가 있는 경우도 많습니다, 이때 필요한 작업이 데이터 전처리 입니다.
+                    </li>
+                    <li class="in_title">2.1 전력 데이터 전처리</li>
+                    <li class="paragraph_content">
+                        전력 데이터에는 6초 간격으로 전력 값들이 저장되어있습니다. <br>
+                        6초간격으로 있는 데이터 값을 1시간 단위로 바꾸기 위해<br>
+                        같은 시각(예를들어 12시00분 부터 12시59분까지 있는 값)에 있는 값들의<br> 
+                        최대 전력값을 그 시각의 전력값으로 가지고 옵니다. 
+                    </li>
+                    <li class="paragraph_image">
+                        <img class="image" src="img/pre/1hour.png" alt="img">
+                        <div class="img_title">
+                            
+                            &#9650;최대값을 쓰는 이유는 시간 당 전력 요금 산정을 최대값 기준으로 하기 때문이다.
+                        </div>
+                        <img class="image" src="img/pre/close.png" alt="img">
+                        <div class="img_title">
+                            
+                            &#9650;딥러닝 학습에서 결손 데이터가 있으면 에러가 발생할 수 있기때문에 결손값들을  예외 처리해줘야 한다.
+                        </div>
+                        <img class="image" src="img/pre/holyday.png" alt="img">
+                        <div class="img_title">
+                            
+                            &#9650;데이터에 휴일을 따로 표시한 모습
+                        </div>
+                    </li>
+                    <li class="in_title">2.2 기온 데이터 전처리 </li>
+                    <li class="paragraph_content">
+                        기상 데이터는 30분 단위로 간격으로 간격으로 저장되어있습니다.<br>
+                        기상 값 사이에 결손 데이터가 있을 경우 이전 시간 대에 기온 값으로 보간합니다.<br>
+                        그리고 같은 시각 대에 두 기온의 평균으로 1시간 단위의 기상 값을 데이터로 나타냈습니다.
+                    </li>
+                    <li class="paragraph_image">
+                        <img class="image" src="img/pre/temp.png" alt="img">
+                        <div class="img_title">
+                            
+                            &#9650;13시 50분에 비어있는 기온 값을 13시 20분 값을 가지고 와서 보간함
+                        </div>
+                      
+                    </li>
+                    
+
+                   
+
+                 </ul>
+            </div>
+        </section>
+        <footer>
+            <div class="footer">
+                
+                <div type="button" class="btn-gotocontent" aria-label="페이지 상단으로 이동" style="display: inline-block;" href="#nav">
+                    <ul class="nav_link">
+                        <li class="nav_item" id="nav_item">항목</li>
+                        <li id="nav_list"><a href="#nav" class="need_nav">1.데이터 수집</a></li>
+                        <li id="nav_list"><a href="#nav_point1" class="var_nav">2.데이터 전처리</a></li>
+                        
+                    </ul>
+                    
+                </div>
+            </div>
+    
+        </footer>
+    </body>
+    </html>

@@ -1,0 +1,140 @@
+:root{
+    
+    
+    --border-gray:rgb(196, 196, 196);
+    --border-sub:rgba(104, 178, 246, 1);
+    --border-img:rgba(48, 42, 42,0.8);
+    --nav-background-color:rgba(0, 78, 160, 0.6);
+    --link-hover-color:rgb(255, 0, 76);
+    --nav-text-color:#fff;
+
+
+
+    
+    
+}
+li{
+    text-decoration: none;
+    list-style:none;
+}
+
+ul{
+    padding:0%;
+}
+
+.data_pre{
+ 
+   text-align: center;
+    
+}
+.pre_title{
+   
+    margin:2.5%;
+    
+    font-size: 54px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: normal;
+    color: #222;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.pre_main{
+    padding-left: 0%;
+    margin:0% 15%;
+    padding: 0% 5%;
+    border: 4px solid var(--border-gray);
+    
+}
+#paragraph{
+    margin-top: 5%;
+}
+.title{
+    margin:5% 0%;
+    font-size:36px;
+    color: #004ea0;
+    font-weight: normal;
+   
+    
+
+
+}
+.subtitle{
+   
+    font-family: 'Nanum Gothic', sans-serif;
+    padding: 4px 2px;
+    margin:2.5% 0;
+    border: 4px solid var(--border-sub);
+    line-height: 34px;
+    font-size: 24px;
+    font-weight: 500;
+   
+   
+}
+.paragraph_image{
+    padding: 16px 16px;
+    border:4px solid var(--border-img);
+}
+.paragraph_content{
+   
+    margin: 5% 0;
+    text-align: left;
+    color: rgb(32, 32, 32);
+    font-size: 18px;
+    font-weight: 300;
+    
+  
+}
+.image{
+    width:70%
+}
+.img_title{
+    
+    margin:2% 0%;
+    color: var(--text-black);
+    font-size: 18px;
+    font-weight: 500;
+}
+.in_title{
+    margin:5% 0em;
+    text-align: left;
+    line-height: 34px;
+    font-size: 24px;
+    font-weight:600;
+}
+
+.btn-gotocontent {
+    
+    position: fixed;
+    left: 52%;
+    bottom: 158px;
+    width: 143px;
+    height: 130px;
+    margin-left: 500px;
+    background: var(--nav-background-color);
+    font-weight: 200;
+    color: var(--nav-text-color);
+    font-size: 15px;
+    
+    z-index: 1;
+}
+.nav_link{
+    padding: 0%;
+    margin:0%;
+    font-size: 18px;
+    text-align: left;
+}
+#nav_list{
+    padding:8px 6px;
+}
+#nav_item{
+    margin:6px;
+    text-align: center;
+}
+
+#nav_list :hover{
+    color: var(--link-hover-color);
+    font-weight: bold;
+    border-radius: 4px;
+
+}

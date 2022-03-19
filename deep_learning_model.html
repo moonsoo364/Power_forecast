@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>딥러닝 모델</title>
+    <!-- fontawsome: 아이콘 -->
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://kit.fontawesome.com/2d323a629b.js"></script>
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <!-- css 스타일 -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/deep_learn.css">
+    <!-- java script 사용 -->
+    <script src="js/hamberg.js" defer></script>
+    <!-- jquery 사용-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   
+</head>
+<body>
+    <nav class="navbar"id="nav">
+        
+
+        <ul class="navbar_menu">
+            <li class="navbar_logo" style="font-size: 36px;">
+                <i class="fas fa-bolt"></i>
+                <a href="/">Team Eletricity</a>
+            </li>
+        
+            <li class="lab_pros"><a href="lab_explain" id="nav_list">연구개요</a></li>
+            <li class="process" id="slide_nav" >                   
+                <a style="cursor: pointer;" id="nav_list">연구과정</a>
+                     <div class="slide_menu">
+                         <div><a id="slide_list" href="data_preprocessing">1.데이터 처리</a></div>
+                         <div><a id="slide_list" href="deep_learning_model">2.딥러닝 모델</a></div>
+                         <div><a id="slide_list" href="graph_predict">3.그래프 예측</a></div>                              
+                     </div>              
+            </li>
+            <li  class="lab_refer"><a id="nav_list" href="reference">참고자료</a></li>
+        
+            
+        </ul>
+        <a href="#" class="navbar_togleBtn">
+            <i class="fas fa-bars"></i>
+        </a>   
+       
+        <script src="js/navigation_slide.js"></script> 
+        
+        
+    </nav>
+        <section class="deep_learning_model">
+            <h1 class="deep_title">딥러닝 모델</h1>
+            <div class="deep_main">
+                    <div class="title"id="close_point">LSTM 모델로 최적의 파라미터 찾기</div>
+                    <div class="subtitle">
+                        해당 페이지에서는 전력 예측에 필요한 파라미터를 조금 씩 바꾸면서<br>
+                        가장 예측 성능이 좋은 모델을 찾는 과정에 대해 설명한 페이지 입니다.
+                    </div>
+
+                   <div class="content_text">
+                       
+                    LSTM(Long Short Term Memory)은 시간 흐름에 따라 변화하는 시계열 데이터를 처리하는 기법 중 하나로 여러 개의 데이터가 순서대로 입력되었을 때
+                    앞서 입력받은 데이터를 기억하고 별도의 가중치를 부여해 학습에 이용하는 RNN(Recurrent Neural Network) 순환 신경망 기법입니다.<br><br>
+
+                    앞서 입력된 데이터의 결과가 뒤의 데이터의 입력에 영향을 주는 것은 공통된 원리이지만, LSTM은 데이터가 전달되기 전에 가중치 판단을 통해 기억된 값을 넘길지 안 넘길지를 결정하는 단계가 추가되었다는 차이가 있습니다.<br><br>
+                    LSTM은 시간성 정보를 이용한 데이터의 특성을 다루는데 특화되어 있으며, 매우 긴 데이터를 처리하는데 강점을 보입니다.
+
+                   </div>
+                   <ul>
+
+                
+                    <button class="select_box" id="feature_start">
+                        <a class="select_box_style">1.Feature값에서 Watt 포함여부</a>
+                        <a class="select_arrow_style">&#9660;</a>
+                        
+                    </button>
+                    <!-- 1.feature 클릭 반응하는 박스 시작 -->
+                    <ul class="select_content" id="feature_area">
+                        <li class="select_in_title" >
+                            1.Feature값에서 Watt 포함여부
+                        </li>
+                       
+                        <li class="select_paragraph">1,2차 모델에서는 다른 요소들은 최소화하고 데이터셋의 분할에서 *Feature에 Watt(전력량)의 여부에 따라 주기별로<br> 
+                            어떤 결과를 보여주는 지 실험했습니다. 1차는 Feature값에 Watt가 포함되어 있지 않고 Label에만 Y값으로 포함되어 있습니다.<br>
+                            학습 결과를 보면 1일 단위에서는 거의 학습이 이뤄지지 않았고, 7일 변화폭이 조금 생겼지만 일치 정도는 다소 떨어지는 것을 볼 수 있습니다.<br>                            
+                            30일 단위에서는 학습과 예측 주기가 너무 길어서 큰 주기로만 증감이 이뤄지는 문제가 있었습니다. 
+                        </li>
+
+                        <li class="select_explain">
+                            *Feature: 학습 혹은 예측할 때 데이터의 특징, 전력 예측 모델에서는 기온,전력값,휴일이 Feature로 사용됬음
+                         </li>
+                         <li class="select_graph">
+                             
+                            <div class="feature_graph_title">
+                                Feauture에 Watt를 포함하지 않은 모델  
+                            </div> 
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/first_day.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;1일 단위에서 전력 예측값이 거의 직선 형태로 나타나는 모습</div>
+                            </div>
+
+                            <div class="graph_content">
+                                <img class="graph_img" src="img/deepleaning/first_week.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;일주일 단위에서는  전력 예측값에 굴곡이 보임</div>
+                            </div>
+
+                            <div class="graph_content">
+                                <img class="graph_img" src="img/deepleaning/first_month.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;한 달 단위에서는 큰 줄기로만 굴곡이 보이고 봉우리 에서는 거의 변화가 없는 모습</div>
+                            </div>
+                            
+                        </li>
+                        <li class="select_graph">
+                             
+                            <div class="feature_graph_title">
+                                Feauture에 Watt를 포함한 모델  
+                            </div> 
+                            <div class="feature_summary">
+                                2차 모델에서는 Feature에 Watt를 포함해서 진행했습니다.<br>
+                                전체적으로 1차보다 학습이 잘됐고 1일 단위에서 가장 민감한 반응을 보임을 알수 있었습니다
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"  src="img/deepleaning/second_day.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;Watt포함 1일 단위 그래프</div>
+                            </div>
+
+                            <div class="graph_content">
+                                <img class="graph_img"  src="img/deepleaning/second_week.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;Watt포함 일주일 단위 그래프</div>
+                            </div>
+
+                            <div class="graph_content">
+                                <img class="graph_img"  src="img/deepleaning/second_month.png" alt="img" class="">
+                                <div class="graph_explain">&#9650;Watt포함 한 달 단위 그래프</div>
+                            </div>
+                           
+                                                 
+                        </li>
+                        <div class="close_box">
+                            <a onclick="
+                            document.getElementById('feature_area').style.display='none';" class="close">닫기</a>                             
+                       </div>
+                                                                                                                   
+                    </ul>
+                    <script>
+                        $(document).ready(function(){
+                            $("#feature_start").click(function(){
+                                var sub_menu =$(this).next("ul");
+                                if(sub_menu.is(":visible")){
+                                    sub_menu.slideUp();
+                                }else if(sub_menu.is(":hidden")){
+                                    sub_menu.slideDown();
+                                }
+                                
+                            });
+                        });
+                    </script>
+                     <!-- 1.feature 클릭 반응하는 박스 끝 -->
+               
+                    <button class="select_box" id="dense_start">
+                        <a class="select_box_style">2.Dense Layer 구조 변경</a>
+                        <a class="select_arrow_style">&#9660;</a>
+                    </button>
+                    <!-- 2.Dense Layer 클릭 반응하는 박스 시작 -->
+                    <ul class="select_content" id="dense_area">
+                        <li class="select_in_title" >
+                            2.Dense Layer구조 변경
+                        </li>
+                        <li class="select_paragraph">
+                            Dense Layer는 데이터를 학습 시키는  층을 나타 낸 것입니다.
+                            이 실험에서는 층을 4층으로 설정하고 안에 노드의 갯수에 따라 예측 결과 값이 어떻게 달라지는 지 확인해보겠습니다.
+                        </li>
+                        <li class="select_graph">    
+                            <div class="graph_content">
+                                <div style="text-align: center;">
+                                <img style=" width:80%;" class="graph_img"src="img/deepleaning/dense_layer.png" alt="img" class="graph_img">
+                            </div>
+                                <div class="graph_explain">&#9650;Dense Layer의 구조</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/node1.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;3차 노드1: 64-32-16-1</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/node2.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;4차 노드2: 64-64-64-1</div>
+                            </div>
+                            
+                        </li>
+                        <li class="select_paragraph">
+                            전체 적으로 큰 차이가 없어 보이지만 4분기 지점에서 노드2로 실험한 결과가 
+                            실제값에 좀 더 정확한 굴곡으로 나왔습니다.                              
+                            똑같이 상승, 하강의 방향성을 가지더라도  같은 노드를 반복하여 학습을 반복해 주는 것이 조금 더 효과적임을 알 수 있었습니다.
+                            
+                        </li>
+                        <div class="close_box">
+                            <a onclick="
+                            document.getElementById('dense_area').style.display='none';" class="close">닫기</a>                             
+                       </div>
+                      
+                        
+                    </ul>
+                    <!-- 2.Dense Layer 클릭 반응하는 박스 끝 -->
+                    <script>
+                        $(document).ready(function(){
+                            $("#dense_start").click(function(){
+                                var sub_menu =$(this).next("ul");
+                                if(sub_menu.is(":visible")){
+                                    sub_menu.slideUp();
+                                }else if(sub_menu.is(":hidden")){
+                                    sub_menu.slideDown();
+                                }
+                                
+                            });
+                        });
+                    </script>
+                     <!-- 3.batch size 클릭 반응하는 박스 시작 -->
+                    <button class="select_box"id="batch_start">
+                        <a class="select_box_style">3.batch size 변경</a>
+                        <a class="select_arrow_style">&#9660;</a>
+                    </button>
+                 
+                    <ul class="select_content" id="batch_area">
+                        <li class="select_in_title" >
+                            3. Batch Size 변경
+                        </li>
+                        <li class="select_paragraph">
+                            5차, 6차는 Batch size를 조절해서 변화를 관찰해 봤습니다. 은닉층, 노드, 활성화 함수, 학습 횟수는 동일하게 설정하고
+                            5차는 Batch size를 16, 6차는 32로 설정해서 결과를 보겠습니다.                       
+                        </li>
+                        <li class="select_explain">
+                            Epoch는 학습의 반복 횟수, Batch는 데이터 샘플의 묶음의 단위 입니다.
+                        </li>
+                         <li class="select_graph">    
+                                                                                  
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/batch_model.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;batch와 epoch의 구조</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/batch_size16.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;5차 batch size=16, 7일 단위</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/batch_size32.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;6차 batch size=32, 7일 단위</div>
+                            </div>
+                            <li class="select_paragraph">
+                                빨간 박스 안을 보면 batch size가 16일 때 보다 32일 때 실제값에 더 비슷한 모습을 한 것을 알 수 있습니다.              
+                            </li>
+                            <div class="close_box">
+                                <a onclick="
+                                document.getElementById('batch_area').style.display='none';" class="close">닫기</a>                             
+                           </div>
+                            
+                        </li>
+                        <script>
+                            $(document).ready(function(){
+                                $("#batch_start").click(function(){
+                                    var sub_menu =$(this).next("ul");
+                                    if(sub_menu.is(":visible")){
+                                        sub_menu.slideUp();
+                                    }else if(sub_menu.is(":hidden")){
+                                        sub_menu.slideDown();
+                                    }
+                                    
+                                });
+                            });
+                        </script>
+                    </ul>
+                    <button class="select_box" id="scaler_start">
+                        <a class="select_box_style">4.데이터 스케일러 설정</a>
+                        <a class="select_arrow_style">&#9660;</a>
+                    </button>
+                    <ul class="select_content" id="scaler_area">
+                        <li class="select_in_title" >
+                            4. 데이터 스케일러 설정
+                        </li>
+                        <li class="select_paragraph">
+                            머신러닝, 딥러닝을 위한 데이터셋을 정제할 때 특성별로 데이터의 스케일이 다르면 서로 다른 범위로 인해 연관이 있는 특성이 상관관계가
+                            없다고 판단되거나 학습이 제대로 되지 않을 수 있기 때문에 데이터 스케일링을 통해 모든 특성의 범위를 같게 만들어줘야 합니다.<br><br>                                                     
+                        </li>
+                        <li class="select_explain">
+                            (Feature에서 전력 값은 수 천 Watt 단위임에 비해서 기온은 0~40도 사이로 스케일 차이가 나서 학습 모델에서 두 특성이 무관한 관계로 판단함)  
+                        </li>
+                        <li class="select_paragraph">
+                            스케일링의 종류에는 크게 표준화와 정규화가 있습니다.<br><br>
+
+                            <b>표준화</b> <br>
+                            >> 특성들의 평균을 0, 분산을 1로 스케일링. 특성들을 정규분포로 만드는 작업<br><br>
+
+                            <b>정규화</b> <br>                     
+                            >> 특성들을 특정 범위(주로 [0,1])로 스케일링. 모든 특성들은 [0,1]의 지정 범위를 가지게 됨.<br><br>
+
+
+                            대표적인 스케일러를 살펴보면<br><br>
+
+                           <b>- Standard Scaler</b> <br>
+
+                              >> 정규 분포로 스케일링<br>
+                              >> 최솟값과 최댓값의 크기를 제한하지 않기 때문에 특정 알고리즘에는 맞지 않음.<br>
+                              >> 이상치에 매우 민감<br>
+                              >> 회귀보다 분류에 유용<br><br>
+
+
+                            <b>- MinMax Scaler</b> <br>
+
+                              >> 특성들을 특정 범위로 스케일링<br>
+                              >> 이상치에 민감<br>
+                              >> 분류보다 회귀에 유용<br><br>
+
+
+                            <b>- MaxAbs Scaler</b><br>
+
+                              >> 각 특성의 절대값이 0과 1 사이가 되도록 스케일링<br>
+                              >> 데이터가 양수일 경우 MinMax Scaler와 동일한 특성을 보임.<br><br>
+
+                            <b>- Robust Scaler</b> <br>
+
+                              >> 평균과 분산 대신에 중간 값(정렬시 중간에 위치한 값)과 사분위 값(1/4, 3/4에 위치한 값)을 사용<br>
+                              >> 이상치 영향을 최소화할 수 있음.
+                        </li>
+                        <li class="select_graph">    
+                                                                                  
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/MinMax.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;7차 MinMax Scaler=A</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/RobustScaler.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;7차 Robust Scaler = B</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/Tunning.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;7차 이중 정규화 (두 모델을 같이 적용한 모델)=C</div>
+                            </div>
+                            <li class="select_paragraph">
+                                결과 그래프에서 A, B, C로 이름을 편하게 붙여봤습니다. A와 B를 비교하면 갑작스레 증가한 이산치값에 대해서는 B가 더 잘 예측한 결과를 보여주지만
+                                증가 후 감소하는 순간에 바로 감소하지 않고 너무 완만한 변화를 보여주거나 조금 증가한 실제값에 대해서도 더 많이 증가할 것으로 예측하는 양극화 문제가 있습니다.
+                                그러한 문제를 해결하기 위해 둘의 장점을 다 얻고자 이중 정규화를 시도해 봤는데 두번 거치면서 오히려 제대로 예측하지 못하게 되었습니다.
+                                이후 모델을 개선하고 다시 스케일링을 고민해봐야겠지만 이중 정규화는 좋지 못한 선택이라 생각됩니다.
+                            </li>
+                            <div class="close_box">
+                                <a onclick="
+                                document.getElementById('scaler_area').style.display='none';" class="close">닫기</a>                             
+                           </div>
+                            
+                        </li>
+                        <script>
+                            $(document).ready(function(){
+                                $("#scaler_start").click(function(){
+                                    var sub_menu =$(this).next("ul");
+                                    if(sub_menu.is(":visible")){
+                                        sub_menu.slideUp();
+                                    }else if(sub_menu.is(":hidden")){
+                                        sub_menu.slideDown();
+                                    }
+                                    
+                                });
+                            });
+                        </script>
+                           
+                    </ul>
+
+                    <button class="select_box"id="validation_start">
+                        <a class="select_box_style">5.Validation Date 설정</a>
+                        <a class="select_arrow_style">&#9660;</a>
+                    </button>
+                    <ul class="select_content" id="validation_area">
+                        <li class="select_in_title" >
+                            5. Validation Date 설정
+                        </li>
+                        <li class="select_paragraph">
+                            *Train Set과 *Validation Set을 나누는 비중을 조절해 봤습니다.(데이터는 13년 1월부터 16년12월까지의 값을 사용했습니다.)
+                            처음에는 13년,14년 데이터를 Train Set으로 15년 데이터를 Validation Set, 마지막 16년을 *Test Set으로 사용하면 딱 맞겠다 생각했는데 
+                            Test Set은 1년을 맞춘다 하더라도 검증 데이터를 꼭 1년으로 해야할지, 만약 비중을 변경하면 어떻게 되는지 테스트 해봤습니다.
+                            <br><br>                                                     
+                        </li>
+                        <li class="select_explain">
+                            Train set:모델을 학습하기 위한 dataset<br>
+                            Validation set은 학습이 이미 완료된 모델을 검증하기 위한 dataset<br>
+                            Test set은 학습과 검증이 완료된 모델의 성능을 평가하기 위한 dataset<br>
+                        </li>
+                        <li class="select_graph">    
+                                                                                  
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/validation_explain.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;신경망 모델에서 데이터를 학습,평가하는 과정</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/8th_model.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;8차 모델</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/validation365.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;8차 validation size를 365로 설정한 결과</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/validation200.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;8차 validation size를 200로 설정한 결과</div>
+                            </div>
+                            <div style="margin-top: 8px;"class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/validation_loss.png" alt="img" class="graph_img">
+                                <div class="graph_explain">
+                                    &#9650;손실 정도의 그래프 <br><br>
+                                    Validation Size 365일(왼쪽) / 
+                                    Validation Size 200일 (오른쪽)                                    
+                                </div>      
+
+                        </li>
+                        <li class="select_paragraph">
+                            그래프 유사도는 365일 버전이 <b style="color: red;">90.736%</b>, 200일 버전이 <b style="color: rgb(47, 0, 255);">90.892%</b>로 전체적인 수치는 큰 차이가 없었습니다. 
+                            손실 정도도 최종적으로는 거의 동일한 값이었으며, 이 부분은 전체 학습에 사용된 데이터가 3년에 불과한 적은
+                            양의 데이터이기 때문에 큰 차이가 없었다고 생각합니다. 만약 데이터가 많아진다면 데이터 분할의 비중이 학습 성능에 미치는 영향은 더 클 것입니다.
+                        </li>
+                        <div class="close_box">
+                            <a onclick="
+                            document.getElementById('validation_area').style.display='none';" class="close">닫기</a>                             
+                       </div>
+                       <script>
+                        $(document).ready(function(){
+                            $("#validation_start").click(function(){
+                                var sub_menu =$(this).next("ul");
+                                if(sub_menu.is(":visible")){
+                                    sub_menu.slideUp();
+                                }else if(sub_menu.is(":hidden")){
+                                    sub_menu.slideDown();
+                                }
+                                
+                            });
+                        });
+                    </script>
+                        
+                    </ul>
+                    <button class="select_box" id="bidirection_start">
+                        <a class="select_box_style">6.양방향 LSTM 활성화 함수 지정 여부</a>
+                        <a class="select_arrow_style">&#9660;</a>
+                    </button>
+                    <ul class="select_content" id="bidirection_area">
+                        <li class="select_in_title" >
+                            6.양방향 LSTM 활성화 함수 지정 여부
+                        </li>
+                        <li class="select_paragraph">
+
+                            양방향 LSTM이 설정된 Bidirectional 층에서 활성화 함수를 'Relu'로 지정해줄지 아니면 기본
+                            Default 설정으로 쓸지 변경했을때의 차이를 보겠습니다. 활성화 함수 지정 여부를 제외하고는 모델 조건은 위 사진과 같이 동일합니다.                           
+                                    
+                        </li>
+                        <li class="select_graph">    
+                                                                                  
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/9th_model.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;9차 모델</div>
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/LSTM_X.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;9차 양방향 LSTM 활성화 함수 미지정</div>                                
+                            </div>
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/LSTM_O.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;9차 양방향 LSTM 활성화 함수 지정</div>                                
+                            </div>
+                        </li>
+                        <li class="select_paragraph">
+                            양방향 LSTM에 활성화 함수를 지정해줬을때 수치적인 결과로는 유사도 90.994% >> 90.971%, 차의 총합은 36.661 >> 38.282로 큰 변화는 없었으나
+                            시각적으로는 높은 값들에 대한 예측은 활성화 함수 지정 버전이 좀더 예측이 정확했습니다. <br><br>
+                        </li>
+                        <li class="select_explain">
+                            (그래프 후반부 제일 높은 값과 그 옆의 값의 경우 미지정은 두개의 예측값이 유사하지만 지정 버전은 더 높은 값을 확실히 구별해서 예측했음.)
+                         </li>
+                         <div class="close_box">
+                            <a onclick="
+                            document.getElementById('bidirection_area').style.display='none';" class="close">닫기</a>                             
+                       </div>
+                      
+
+
+
+                    </ul>
+                    <script>
+                        $(document).ready(function(){
+                            $("#bidirection_start").click(function(){
+                                var sub_menu =$(this).next("ul");
+                                if(sub_menu.is(":visible")){
+                                    sub_menu.slideUp();
+                                }else if(sub_menu.is(":hidden")){
+                                    sub_menu.slideDown();
+                                }
+                                
+                            });
+                        });
+                    </script>
+                    <button class="select_box"id=finish_start>
+                        <a class="select_box_style">7.실험결과</a>
+                        <a class="select_arrow_style">&#9660;</a>
+                    </button>
+                    <ul class="select_content" id="finish_area">
+                        <li class="select_in_title" >
+                            7.실험 종료
+                        </li>
+                        <li class="select_paragraph">
+                            최종적으로는 아래와 같은 모델로 학습을 진행했고, 모델 계층은 <br><br>
+
+                            <b>512-512(양방향)-256-256(양방향)-128-128(양방향)-64-64(양방향)-32-1</b> 로 구성되어 있습니다. <br><br>
+                            
+                            양방향 LSTM의 활성화 함수 지정은 맨 마지막만 하지 않았고, 전체 활성화 함수는 'ReLU'를 선택했습니다. <br><br>                           
+                            
+                            그 외의 조건들은 <br><br>
+                                            
+                            <b>
+                            Validation Size = 0.365<br><br>
+                            
+                            Min-Max Scaler<br><br>
+                            
+                            학습 주기 = 1일 단위<br><br>
+                            
+                            Batch Size = 32<br><br>
+                            
+                            Epoch = 25 (조기 종료로 최적값은 15회 부근에서 도출됨.)
+                        </b>
+                            
+                                    
+                        </li>
+                        <li class="select_graph">    
+                                                                                  
+                            <div class="graph_content">
+                                <img class="graph_img"src="img/deepleaning/10th_model_bi.png" alt="img" class="graph_img">
+                                <div class="graph_explain">&#9650;10차 모델 (양방향 코드 설명 포함)</div>
+                            </div>
+                            <div class="graph_content">
+                                
+                                <div style="text-align: center; "> 
+                                    <img style="width:50%;"class="graph_img"src="img/deepleaning/10th_model.png" alt="img" class="graph_img">
+                                </div>
+                                <div class="graph_explain">&#9650;10차 모델</div>                                
+                            </div>
+                           
+                            
+                            
+                        </li>
+                        <li class="select_paragraph">
+                            현재는 그래프 유사도 <b style="color:red">90.971%</b>.예측값과 실제값의 차 절댓값 총합은 <b style="color:blue;">38.282</b>의 수치로
+                            유사도는 높은 수치이며 차 총합의 경우 365일의 최대 오차가 365이므로  (1과 0으로 스케일링 했기 때문에 정반대 예측은 하루당 1이 나옴.) 38.282/365=0.1049 이를 계산하면 약 90%의 수치적 일치도를 최종적으로 확인할 수 있었습니다.
+                            
+                        </li>
+                        <div class="close_box">
+                            <a onclick="
+                            document.getElementById('finish_area').style.display='none';" class="close">닫기</a>                             
+                       </div>
+                       <script>
+                        $(document).ready(function(){
+                            $("#finish_start").click(function(){
+                                var sub_menu =$(this).next("ul");
+                                if(sub_menu.is(":visible")){
+                                    sub_menu.slideUp();
+                                }else if(sub_menu.is(":hidden")){
+                                    sub_menu.slideDown();
+                                }
+                                
+                            });
+                        });
+                    </script>
+                    </ul>
+
+                                                                  
+            </div>
+        </section>    
+        
