@@ -8,7 +8,7 @@ let global_array = [];
 //처음 로딩 될 때 LSTM 차트
 window.addEventListener('load', ()=>{
   document.getElementById('month').value = "1";
-  fetch(`http://localhost:8080/lstm`, {
+  fetch(`http://3.34.100.238:8080/lstm`, {
       method : 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ window.addEventListener('load', ()=>{
 document.getElementById('month').addEventListener('change', ()=>{
   //문서에서 id가 month인 값이 12보다 같거나작고 1보다 같거나 클 때
   if( document.getElementById('month').value <= 12 && document.getElementById('month').value >= 1 ){
-    fetch(`http://localhost:8080/lstm`, {
+    fetch(`http://3.34.100.238:8080/lstm`, {
       method : 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ document.getElementById('month').addEventListener('change', ()=>{
 //처음 로딩 될 때 CNN+LSTM 차트 
 window.addEventListener('load', ()=>{
   document.getElementById('month').value = "1";
-  fetch(`http://localhost:8080/cnn`, {
+  fetch(`http://3.34.100.238:8080/cnn`, {
       method : 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -335,7 +335,7 @@ window.addEventListener('load', ()=>{
 document.getElementById('month').addEventListener('change', ()=>{
   //문서에서 id가 month인 값이 12보다 같거나작고 1보다 같거나 클 때
   if( document.getElementById('month').value <= 12 && document.getElementById('month').value >= 1 ){
-    fetch(`http://localhost:8080/cnn`, {
+    fetch(`http://3.34.100.238:8080/cnn`, {
       method : 'POST',
       headers: {
         'Content-Type': 'application/json',
