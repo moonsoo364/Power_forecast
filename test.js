@@ -67,7 +67,7 @@ app.post('/lstm', (req, res)=>{
     //Data 디렉토리에 '숫자'm.csv 파일을 utf-8형식으로 안에 데이터를 읽는다.
     fs.readFile(`./Data_LSTM/${Number(req.body.month)}m.csv`, "utf-8", (err, data)=>{
         //숫자,날짜,예측값,실제값으로 한 줄씩 읽는다.
-        array = data.split(/\r\n|\n/).map((value)=>{
+        array = data.split('\r\n').map((value)=>{
             //배열 초기화
             let jsondata = {
                 index : '',
@@ -108,9 +108,9 @@ app.post('/cnn', (req, res)=>{
     //let은 재선언 불가능하고 재할당이 가능한 함수 
     let array = [];
     //Data 디렉토리에 '숫자'm.csv 파일을 utf-8형식으로 안에 데이터를 읽는다.
-    fs.readFile(`./Data_CNN+LSTM/${Number(req.body.month)}m.csv`, "utf-8", (err, data)=>{
+    fs.readFile(`./data_CNN+LSTM/${Number(req.body.month)}m.csv`, "utf-8", (err, data)=>{
         //숫자,날짜,예측값,실제값으로 한 줄씩 읽는다.
-        array = data.split(/\r\n|\n/).map((value)=>{
+        array = data.split('\r\n').map((value)=>{
             //배열 초기화
             let jsondata = {
                 index : '',
@@ -144,7 +144,6 @@ app.post('/cnn', (req, res)=>{
         
         //respond에 array(csv 파일 배열 값)을 넣는다
         res.send(array);
-        console.table(array);
     })
 
 })

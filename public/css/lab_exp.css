@@ -157,5 +157,6 @@ li{
     color: var(--link-hover-color);
     font-weight: bold;
     border-radius: 4px;
+    cursor: pointer;
 
 }

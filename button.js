@@ -8,7 +8,7 @@ let global_array = [];
 //처음 로딩 될 때 LSTM 차트
 window.addEventListener('load', ()=>{
   document.getElementById('month').value = "1";
-  fetch(`http://3.34.100.238:8080/lstm`, {
+  fetch(`http://localhost:8080/lstm`, {
       method : 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ window.addEventListener('load', ()=>{
             {
               let realdata = [];
               var chartData=[
-                ['날짜','실제 전력값','예측 전력값'],
+                ['날짜','예측 전력값','실제 전력값'],
               ];
               //1m.csv일 경우 dataa=[[0,2016-01-01-1,0.0909069777,0.00985964505], .... [742,	2016-01-31-23,	0.117353901,	0.012643545]]
               //i=index number 742번까지 반복
@@ -49,15 +49,15 @@ window.addEventListener('load', ()=>{
               //[new Date(2016, 01, 01, 1, 1),0.179952,	0.315392646]
               //new Date(2016년,month value값의 1을 뺀값,slice(8,10)=2016-01(-01)-1,slice(11)=2016-01-01(-1))
               realdata.push(new Date(2016, document.getElementById('month').value-1, dataa[i].date.slice(8, 10), dataa[i].date.slice(11)));
-              realdata.push(Number(dataa[i].real));
               realdata.push(Number(dataa[i].pre));
+              realdata.push(Number(dataa[i].real));
+              
              
               chartData.push(realdata);
             }
              //모든 값을 콘솔에 출력
             console.log(chartData)
-            //chartdata=['날짜','실제 전력값','예측 전력값'],[2016-01-01-1,0.179952,0.315392646]], ...[742,	2016-01-31-23,	0.117353901,	0.012643545]
-            //가 담기게 됨
+            
             
           
             var dataTable=google.visualization.arrayToDataTable(chartData);
@@ -124,7 +124,7 @@ window.addEventListener('load', ()=>{
 document.getElementById('month').addEventListener('change', ()=>{
   //문서에서 id가 month인 값이 12보다 같거나작고 1보다 같거나 클 때
   if( document.getElementById('month').value <= 12 && document.getElementById('month').value >= 1 ){
-    fetch(`http://3.34.100.238:8080/lstm`, {
+    fetch(`http://localhost:8080/lstm`, {
       method : 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -151,13 +151,14 @@ document.getElementById('month').addEventListener('change', ()=>{
             {
               let realdata = [];
               var chartData=[
-                ['날짜','실제 전력값','예측 전력값'],
+                ['날짜','예측 전력값','실제 전력값'],
               ];
             for(let i=0; i<dataa.length; i++){
               realdata = [];
               realdata.push(new Date(2016, document.getElementById('month').value-1, dataa[i].date.slice(8, 10), dataa[i].date.slice(11)));
-              realdata.push(Number(dataa[i].real));
               realdata.push(Number(dataa[i].pre));
+              realdata.push(Number(dataa[i].real));
+             
               chartData.push(realdata);
             }
             console.log(chartData)
@@ -221,7 +222,7 @@ document.getElementById('month').addEventListener('change', ()=>{
 //처음 로딩 될 때 CNN+LSTM 차트 
 window.addEventListener('load', ()=>{
   document.getElementById('month').value = "1";
-  fetch(`http://3.34.100.238:8080/cnn`, {
+  fetch(`http://localhost:8080/cnn`, {
       method : 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -253,7 +254,7 @@ window.addEventListener('load', ()=>{
             {
               let realdata = [];
               var chartData=[
-                ['날짜','실제 전력값','예측 전력값'],
+                ['날짜','예측 전력값','실제 전력값'],
               ];
               //1m.csv일 경우 dataa=[[0,2016-01-01-1,0.0909069777,0.00985964505], .... [742,	2016-01-31-23,	0.117353901,	0.012643545]]
               //i=index number 742번까지 반복
@@ -262,15 +263,15 @@ window.addEventListener('load', ()=>{
               //[new Date(2016, 01, 01, 1, 1),0.179952,	0.315392646]
               //new Date(2016년,month value값의 1을 뺀값,slice(8,10)=2016-01(-01)-1,slice(11)=2016-01-01(-1))
               realdata.push(new Date(2016, document.getElementById('month').value-1, dataa[i].date.slice(8, 10), dataa[i].date.slice(11)));
-              realdata.push(Number(dataa[i].real));
               realdata.push(Number(dataa[i].pre));
+              realdata.push(Number(dataa[i].real));
+             
              
               chartData.push(realdata);
             }
              //모든 값을 콘솔에 출력
             console.log(chartData)
-            //chartdata=['날짜','실제 전력값','예측 전력값'],[2016-01-01-1,0.179952,0.315392646]], ...[742,	2016-01-31-23,	0.117353901,	0.012643545]
-            //가 담기게 됨
+          
             
           
             var dataTable=google.visualization.arrayToDataTable(chartData);
@@ -335,7 +336,7 @@ window.addEventListener('load', ()=>{
 document.getElementById('month').addEventListener('change', ()=>{
   //문서에서 id가 month인 값이 12보다 같거나작고 1보다 같거나 클 때
   if( document.getElementById('month').value <= 12 && document.getElementById('month').value >= 1 ){
-    fetch(`http://3.34.100.238:8080/cnn`, {
+    fetch(`http://localhost:8080/cnn`, {
       method : 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -362,13 +363,14 @@ document.getElementById('month').addEventListener('change', ()=>{
             {
               let realdata = [];
               var chartData=[
-                ['날짜','실제 전력값','예측 전력값'],
+                ['날짜','예측 전력값','실제 전력값'],
               ];
             for(let i=0; i<dataa.length; i++){
               realdata = [];
               realdata.push(new Date(2016, document.getElementById('month').value-1, dataa[i].date.slice(8, 10), dataa[i].date.slice(11)));
-              realdata.push(Number(dataa[i].real));
               realdata.push(Number(dataa[i].pre));
+              realdata.push(Number(dataa[i].real));
+             
               chartData.push(realdata);
             }
             console.log(chartData)
